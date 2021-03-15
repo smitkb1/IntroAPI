@@ -119,4 +119,8 @@ class ApiController extends Controller
             return response()->json(['message' => 'Car not found.'], 404);
         }
     }
+
+    public function getAllInstitutions(Request $request) {
+        return Institution::with(['students'])->get();
+    } 
 }

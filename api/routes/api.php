@@ -35,5 +35,9 @@ Route::group(['prefix' => 'cars'], function() {
     Route::get('/{id}', 'ApiController@getCar');
 });
 
+Route::group(['prefix' => 'institutions'], function () {
+    Route::get('/', 'ApiController@getAllInstitutions');
+});
+
 
 
