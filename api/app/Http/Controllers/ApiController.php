@@ -10,8 +10,20 @@ use Validator;
 class ApiController extends Controller
 {
     public function createStudent(Request $request) {
-        Student::create($request->all());
-        return response()->json(['message' => 'Student created.'], 201);
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone_number' => 'required',
+            'email_address' => 'required'
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 403);
+        } else {
+            Student::create($request->all());
+            return response()->json(['message' => 'Student created.'], 201);
+        }
+
     }
 
     public function updateStudent(Request $request, $id) {
