@@ -18,6 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['prefix' => 'institutions'], function () {
+    Route::get('/', 'ApiController@getAllInstitutions');
+});
 
 Route::group(['prefix' => 'students'], function() {
     Route::post('/', 'ApiController@createStudent');
@@ -34,10 +37,3 @@ Route::group(['prefix' => 'cars'], function() {
     Route::get('/', 'ApiController@getAllCars');
     Route::get('/{id}', 'ApiController@getCar');
 });
-
-Route::group(['prefix' => 'institutions'], function () {
-    Route::get('/', 'ApiController@getAllInstitutions');
-});
-
-
-

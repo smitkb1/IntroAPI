@@ -11,9 +11,15 @@ class Institution extends Model
 
     protected $table = 'institutions';
 
-    protected $fillable = ['name', 'city', 'state', 'country'];
+    protected $fillable = ['name', 'city', 'state', 'country',];
+
+    protected $appends = ['students_count'];
 
     public function students() {
         return $this->hasMany(Student::class);
+    }
+
+    public function getStudentsCountAttribute() {
+        return $this->students()->count();
     }
 }

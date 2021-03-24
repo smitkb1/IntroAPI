@@ -14,7 +14,8 @@ class ApiController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'phone_number' => 'required',
-            'email_address' => 'required'
+            'email_address' => 'required',
+            'institution_id' => 'required'
         ]);
     
         if ($validator->fails()) {
@@ -34,6 +35,7 @@ class ApiController extends Controller
             $student->last_name = is_null($request->last_name) ? $student->last_name : $request->last_name;
             $student->phone_number = is_null($request->phone_number) ? $student->phone_number : $request->phone_number;
             $student->email_address = is_null($request->email_address) ? $student->email_address : $request->email_address;
+            $student->institution_id = is_null($request->institution_id) ? $student->institution_id : $request->institution_id;
             $student->save();
             return response()->json(['message' => 'Student updated.'], 200);
         } else {
@@ -72,8 +74,18 @@ class ApiController extends Controller
     }
 
     public function createCar(Request $request) {
-        Car::create($request->all());
-        return response()->json(['message' => 'Car created.'], 201);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'year' => 'required',
+            'price' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 403);
+        } else {
+            Student::create($request->all());
+            return response()->json(['message' => 'Car created.'], 201);
+        }
     }
 
     public function updateCar(Request $request, $id) {

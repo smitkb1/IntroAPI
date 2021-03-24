@@ -22,7 +22,7 @@ class CarSeeder extends Seeder
             car::create(array(
                 'name' => $obj->name,
                 'year' => $obj->year,
-                'price' => $obj->price,
+                'price' => $obj->price
             ));
         } 
     }

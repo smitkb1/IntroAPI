@@ -23,8 +23,7 @@ class InstitutionSeeder extends Seeder
                 'name' => $obj->name,
                 'city' => $obj->city,
                 'state' => $obj->state,
-                'country' => $obj->country,
-                'institution_id' => $obj->institution_id
+                'country' => $obj->country
             ));
         } 
     }
